@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>محرك نماذج عبء العمل</title>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>محرك نماذج عبء العمل</h1>
+      <p class="sub">توليد عكسي لنموذج مهام افتراضي يبدأ من عدد الموظفين المستهدف</p>
+    </div>
+    <span class="tag">نموذج افتراضي</span>
+  </header>
+
+  <section class="panel">
+    <div class="controls">
+      <div class="field">
+        <label for="emp">عدد الموظفين المستهدف</label>
+        <input id="emp" type="number" min="3" max="150" step="1" placeholder="3 – 150" autofocus>
+      </div>
+      <div class="target">
+        <span>الساعات المستهدفة</span>
+        <b id="tgt">—</b>
+        <span>= الموظفون × 1,023 ساعة</span>
+      </div>
+      <div class="btns">
+        <button class="primary" id="gen">توليد النموذج</button>
+        <button id="alt">سيناريو بديل</button>
+        <button id="xls">تصدير Excel</button>
+      </div>
+      <p class="err" id="err" hidden></p>
+    </div>
+    <p class="note" id="xlsnote" hidden>تعذّر تحميل مكتبة Excel. تأكد من وجود الملف lib/exceljs.min.js ثم أعد تحميل الصفحة.</p>
+    <p class="toast" id="toast" hidden></p>
+  </section>
+
+  <p class="disclaimer">هذا النموذج هيكل أولي مشتق من الهدف نفسه، ولا يقيس الاحتياج الفعلي. استبدل المهام الافتراضية والأحجام بالمهام الفعلية للجهة قبل اعتماده.</p>
+
+  <section class="panel empty" id="empty">
+    <b id="emptyTitle">أدخل عدد الموظفين المستهدف ثم اضغط «توليد النموذج»</b>
+    <p class="note">العدد المسموح من 3 إلى 150. بعد التوليد يظهر هنا الهيكل المقترح وجدول المهام ونتيجة التحقق.</p>
+  </section>
+
+  <div id="results" hidden>
+  <div class="grid2">
+    <section class="panel">
+      <h2>الهيكل المقترح <small id="structMeta"></small></h2>
+      <div class="scroll"><table id="structTbl"></table></div>
+    </section>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>سجل البحث <small id="searchMeta"></small></h2>
+        <label class="level" title="بداية عدد المهام = المستوى × عدد الموظفين">
+          <span>المستوى</span>
+          <select id="mult">
+            <option value="2" selected>× 2</option>
+            <option value="4">× 4</option>
+            <option value="6">× 6</option>
+          </select>
+        </label>
+      </div>
+      <p class="note" style="margin-bottom:10px">أفضل سيناريو لكل عدد مهام جُرِّب. الصف المظلل هو المعتمد.</p>
+      <div class="scroll"><table id="searchTbl"></table></div>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>التحقق وجودة النموذج</h2>
+    <div class="verify" id="verify"></div>
+    <div class="grade"><span id="gradePill" class="pill"></span><span class="note" id="gradeNote"></span></div>
+    <div class="scores" id="scores"></div>
+  </section>
+
+  <section class="panel">
+    <h2>جدول المهام التفصيلي <small id="taskMeta"></small></h2>
+    <div class="scroll"><table id="taskTbl"></table></div>
+  </section>
+
+  </div>
+
+  <footer>
+    <span>إعداد: AHMAD ZYAD — تخطيط الموارد البشرية</span>
+    <span id="seedInfo"></span>
+  </footer>
+</div>
+
+<script src="lib/exceljs.min.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/export-excel.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
